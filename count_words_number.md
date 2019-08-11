@@ -1,4 +1,7 @@
-```
+# count_words_number
+
+```c++
+
 #include <stdio.h>
 #include <string.h>
 int check(char c)
@@ -25,4 +28,5 @@ int main()
     printf("%d\n",cnt);
     return 0;
 }
+
 ```
