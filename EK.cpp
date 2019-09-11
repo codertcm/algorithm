@@ -64,6 +64,7 @@ int main(int argc, char **argv)
 	int start, ed, ci, st, se;
 	//freopen("testdata.in" , "r", stdin);
 	//freopen("aaa.out","w", stdout );
+    // O(n * m ^ 2);
 	while(cin >> m >> n){
 		memset(capacity, 0, sizeof(capacity));
 		memset(flow, 0, sizeof(flow));
