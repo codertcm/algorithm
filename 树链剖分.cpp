@@ -1,6 +1,3 @@
-# 树链剖分
-
-```c++
 
 #include<iostream>
 #include<cstdio>
@@ -194,4 +191,4 @@ signed main()
     return 0;
 }
 
-```
+

@@ -1,6 +1,4 @@
-# 棋盘覆盖
 
-```c++
 
 package com.company;
 
@@ -65,4 +63,3 @@ public class Main {
     }
 }
 
-```

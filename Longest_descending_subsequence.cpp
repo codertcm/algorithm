@@ -1,6 +1,4 @@
-# 最长下降子序列
 
-```c++
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -29,4 +27,4 @@ int main(){
     return 0;
 }
 
-```
+

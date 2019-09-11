@@ -1,6 +1,4 @@
-# count_words_number
 
-```c++
 
 #include <stdio.h>
 #include <string.h>
@@ -29,4 +27,3 @@ int main()
     return 0;
 }
 
-```
