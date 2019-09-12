@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
+#include<iostream>
+#include<string.h>
+#include<queue>
 using namespace std;
 
 typedef long long int LL;
@@ -15,7 +18,7 @@ struct Edge {
 Edge e[M];
 int head[N];
 int dep[N]; // 表示节点深度
-int cur[N];
+int cur[N]; // 当前弧优化
 
 void add(int u, int v, int w){
     e[cnt].w = w;
@@ -36,14 +39,14 @@ int bfs(){
     queue<int> q;
     q.push(s);
     dep[s] = 0;
-    while(!q.empty()){ 
+    while(!q.empty()){
         int u = q.front();  // 正常BFS
         q.pop();
         for(int i=head[u]; ~i; i = e[i]._next){
             int v = e[i].v;
             if(dep[v] == -1 && e[i].w != 0){
                 dep[v] = dep[u] + 1; // 分层，即该点在第几层里
-                if(v == t) return 1;
+                if(v == t) return 1; // 搜到t的边就可以停止了
                 q.push(v);
             }
         }
@@ -53,10 +56,10 @@ int bfs(){
 }
 
 int dfs(int u, int f){ // 当前到达的点和当前到达的流量
-    if(u == t)      // 当前到达了汇点，返回当前流量
+    if(u == t || f == 0)      // 当前到达了汇点，返回当前流量
         return f;
-    for(int i=cur[s]; ~i; i=e[i]._next){
-        cur[s] = i;
+    for(int i=cur[u]; ~i; i=e[i]._next){
+        cur[u] = i; // 去掉榨干的边
         int v = e[i].v;
         if(dep[v] == dep[u]+1 && e[i].w != 0){ // 是分层图 && 残量不为零 (还可以再分配流量)
             // 每一次由u推出v的深度必须是u的深度+1
@@ -75,7 +78,9 @@ int main(int argc, char **argv)
 {
     //freopen("in.txt", "r", stdin);
     //freopen("out.txt", "w", stdout);
-    while(cin >> n >> m >> s >> t){
+    while(cin >> m >> n){
+        s = 1;
+        t = n;
         cnt = 0;
         memset(head, -1, sizeof(head));
         for(int i=1;i<=m;i++){
@@ -86,12 +91,10 @@ int main(int argc, char **argv)
         int ans = 0;
 
         while(bfs()){  // 直到不存在增广路为止
-            for(i=0;i<N;i++){
-                cur[i] = head[i];
+            for(int i=0;i<N;i++){
+                cur[i] = head[i]; // 恢复原值
             }
-            while( int  d = dfs(s, INF) ){ // INF 使得dfs增广值为e[i].w, "灌满"第一条路
-                ans += d;
-            }     
+            ans += dfs(s, INF); // INF 使得dfs增广值为e[i].w, "灌满"第一条路
         }
         cout << ans << endl;
     }
