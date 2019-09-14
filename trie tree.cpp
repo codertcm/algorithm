@@ -1,4 +1,4 @@
-```
+
 #include <stdio.h>
 #include <stdlib.h>
 #define ALPHASET_SIZE 26
@@ -89,4 +89,4 @@ int main()
     }
     return 0;
 }
-```
+
